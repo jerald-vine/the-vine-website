@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  THE VINE - Business Card (Front, Square)
+  Size: 2.5" x 2.5" (square), 300 DPI = 750 x 750 units
+  Print: Export as PDF or print directly. Rounded corners for modern look.
+
+  Colors: Editorial palette (matches thevineathens.church)
+    Paper: #f4ede0 (warm newsprint)
+    Ink: #1f1d18 (deep warm black)
+    Rust: #c8553d (primary accent)
+    Teal: #2a5f5b (leaf fill)
+    Gold: #b88828 (fruit/highlight)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" width="750" height="750">
+  <!-- Card background (warm newsprint paper) -->
+  <rect width="750" height="750" fill="#f4ede0" rx="48"/>
+
+  <!-- Editorial border frame (rounded) -->
+  <rect x="24" y="24" width="702" height="702" fill="none" stroke="#1f1d18" stroke-width="1.5" rx="36"/>
+
+  <!-- Woodcut vine leaf logo -->
+  <g transform="translate(375, 210)">
+    <g transform="scale(0.6) translate(-100, -96)">
+      <path d="M100 188 C100 188 38 138 38 82 C38 40 64 12 100 4 C136 12 162 40 162 82 C162 138 100 188 100 188Z"
+            fill="#2a5f5b" stroke="#1f1d18" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M100 178 C100 178 50 132 50 82 C50 48 70 22 100 16 L100 178Z"
+            fill="#357b76" opacity="0.6"/>
+      <path d="M100 32 L100 162" stroke="#f4ede0" stroke-width="6" stroke-linecap="round"/>
+      <path d="M100 60 C84 52 70 56 60 64" fill="none" stroke="#f4ede0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M100 92 C116 84 130 88 140 96" fill="none" stroke="#f4ede0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M100 124 C84 116 70 120 60 132" fill="none" stroke="#f4ede0" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="56" cy="64" rx="8" ry="4.5" fill="#f4ede0" transform="rotate(-30 56 64)"/>
+      <ellipse cx="144" cy="96" rx="8" ry="4.5" fill="#f4ede0" transform="rotate(30 144 96)"/>
+      <ellipse cx="56" cy="132" rx="8" ry="4.5" fill="#f4ede0" transform="rotate(-30 56 132)"/>
+      <circle cx="100" cy="60" r="6" fill="#c8553d"/>
+      <circle cx="100" cy="92" r="6" fill="#c8553d"/>
+      <circle cx="100" cy="124" r="6" fill="#c8553d"/>
+      <circle cx="100" cy="156" r="8" fill="#b88828"/>
+      <circle cx="100" cy="156" r="3" fill="#1f1d18" opacity="0.45"/>
+    </g>
+  </g>
+
+  <!-- Decorative rust rule -->
+  <line x1="285" y1="292" x2="465" y2="292" stroke="#c8553d" stroke-width="2"/>
+
+  <!-- "The" prefix -->
+  <text x="375" y="345" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, serif"
+        font-size="28" font-weight="500" font-style="italic" fill="#6b6556"
+        letter-spacing="2px">The</text>
+
+  <!-- "Vine" title -->
+  <text x="375" y="440" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, serif"
+        font-size="90" font-weight="900" font-style="italic" fill="#1f1d18"
+        letter-spacing="-2px">Vine</text>
+
+  <!-- Tagline -->
+  <text x="375" y="500" text-anchor="middle"
+        font-family="'Caveat', cursive"
+        font-size="32" font-weight="700" fill="#c8553d">Where You Already Belong</text>
+
+  <!-- Decorative rust rule -->
+  <line x1="300" y1="528" x2="450" y2="528" stroke="#c8553d" stroke-width="1.5"/>
+
+  <!-- Website URL -->
+  <text x="375" y="575" text-anchor="middle"
+        font-family="'JetBrains Mono', monospace"
+        font-size="20" fill="#8e8775" letter-spacing="1px">thevineathens.church</text>
+
+  <!-- Small editorial leaf marks in corners -->
+  <g transform="translate(55, 55) scale(0.12) translate(-100, -96)" opacity="0.2">
+    <path d="M100 188 C100 188 38 138 38 82 C38 40 64 12 100 4 C136 12 162 40 162 82 C162 138 100 188 100 188Z"
+          fill="#2a5f5b" stroke="none"/>
+  </g>
+  <g transform="translate(695, 695) scale(0.12) translate(-100, -96)" opacity="0.2">
+    <path d="M100 188 C100 188 38 138 38 82 C38 40 64 12 100 4 C136 12 162 40 162 82 C162 138 100 188 100 188Z"
+          fill="#2a5f5b" stroke="none"/>
+  </g>
+</svg>

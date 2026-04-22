@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  THE VINE - Hand Flyer (Camera-Ready)
+  Trim: 5.5" x 8.5" (half letter) at 300 DPI = 1650 x 2550 units
+  Bleed: 1/8" (37.5 units) on all sides = document 1725 x 2625
+  Crop marks: included at trim corners
+
+  Print workflow: Open in Illustrator/Inkscape, export to PDF, send to printer
+  Fonts: Playfair Display, Lora, Inter, JetBrains Mono, Caveat
+         (must be installed or outlined before print)
+
+  Colors: Editorial palette (matches thevineathens.church)
+    Paper: #f4ede0     Ink-900: #1f1d18     Ink-700: #3a362d
+    Ink-500: #6b6556   Ink-400: #8e8775     Ink-200: #d2cab6
+    Rust-500: #c8553d  Rust-700: #a44427    Teal-500: #2a5f5b
+    Gold-500: #b88828
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-37.5 -37.5 1725 2625" width="1725" height="2625">
+  <defs>
+    <radialGradient id="header-bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#2a2620"/>
+      <stop offset="100%" stop-color="#1f1d18"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background (paper, extended to bleed) -->
+  <rect x="-37.5" y="-37.5" width="1725" height="2625" fill="#f4ede0"/>
+
+  <!-- ===== HEADER (dark editorial band) ===== -->
+  <g transform="translate(0, 0)">
+    <rect x="-37.5" y="-37.5" width="1725" height="557.5" fill="url(#header-bg)"/>
+
+    <!-- Woodcut leaf logo -->
+    <g transform="translate(950, 95) scale(0.7) translate(-100, -96)">
+      <path d="M100 188 C100 188 38 138 38 82 C38 40 64 12 100 4 C136 12 162 40 162 82 C162 138 100 188 100 188Z"
+            fill="#2a5f5b" stroke="#3a362d" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M100 178 C100 178 50 132 50 82 C50 48 70 22 100 16 L100 178Z"
+            fill="#357b76" opacity="0.5"/>
+      <path d="M100 32 L100 162" stroke="#f4ede0" stroke-width="5" stroke-linecap="round"/>
+      <path d="M100 60 C84 52 70 56 60 64" fill="none" stroke="#f4ede0" stroke-width="4" stroke-linecap="round"/>
+      <path d="M100 92 C116 84 130 88 140 96" fill="none" stroke="#f4ede0" stroke-width="4" stroke-linecap="round"/>
+      <path d="M100 124 C84 116 70 120 60 132" fill="none" stroke="#f4ede0" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="100" cy="60" r="5" fill="#c8553d"/>
+      <circle cx="100" cy="92" r="5" fill="#c8553d"/>
+      <circle cx="100" cy="124" r="5" fill="#c8553d"/>
+      <circle cx="100" cy="156" r="7" fill="#b88828"/>
+    </g>
+
+    <!-- "THE VINE" title -->
+    <text x="825" y="375" text-anchor="middle"
+          font-family="'Playfair Display', Georgia, serif"
+          font-size="148" font-weight="900" font-style="italic" fill="#f4ede0"
+          letter-spacing="-3px">The Vine</text>
+
+    <!-- Tagline -->
+    <text x="825" y="440" text-anchor="middle"
+          font-family="'Caveat', cursive"
+          font-size="66" font-weight="700" fill="#b88828"
+          opacity="0.9">Where You Already Belong</text>
+
+    <!-- Thin rust rule at bottom of header -->
+    <line x1="100" y1="480" x2="1550" y2="480" stroke="#c8553d" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- ===== ILLUSTRATION (Ocoee River / Mountains - woodcut style) ===== -->
+  <g transform="translate(0, 520)">
+    <!-- Landscape background (warm ink tones) -->
+    <rect x="-37.5" width="1725" height="480" fill="#3a362d"/>
+
+    <!-- Mountains back layer -->
+    <path d="M0,260 L180,150 L360,210 L600,105 L840,180 L1020,90 L1200,165 L1350,120 L1650,195 L1650,480 L0,480 Z"
+          fill="#4a4538"/>
+    <!-- Mountains front layer -->
+    <path d="M0,315 L240,210 L480,255 L720,165 L960,225 L1200,180 L1440,240 L1650,195 L1650,480 L0,480 Z"
+          fill="#6b6556"/>
+
+    <!-- River -->
+    <path d="M-30,330 Q300,300 600,345 Q900,315 1230,336 Q1500,300 1680,336"
+          fill="none" stroke="#2a5f5b" stroke-width="54" stroke-linecap="round" opacity="0.5"/>
+    <path d="M-30,335 Q300,308 600,350 Q900,322 1230,342 Q1500,308 1680,342"
+          fill="none" stroke="#4f8580" stroke-width="28" stroke-linecap="round" opacity="0.35"/>
+
+    <!-- Church location pin (rust) -->
+    <g transform="translate(825, 210)">
+      <circle r="30" fill="#c8553d" opacity="0.2"/>
+      <circle r="15" fill="#c8553d"/>
+      <path d="M0,-9 L0,9" stroke="#f4ede0" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M-6,0 L6,0" stroke="#f4ede0" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Subtle river highlight -->
+    <path d="M0,295 Q400,275 800,300 Q1200,280 1650,295"
+          fill="none" stroke="#4f8580" stroke-width="4" stroke-opacity="0.15"/>
+  </g>
+
+  <!-- ===== CONTENT (paper background) ===== -->
+  <g transform="translate(0, 1000)">
+    <!-- Pull quote -->
+    <text x="825" y="135" text-anchor="middle" font-family="'Playfair Display', Georgia, serif"
+          font-size="60" font-weight="700" font-style="italic" fill="#1f1d18">No dress code. No judgment.</text>
+    <text x="825" y="205" text-anchor="middle" font-family="'Playfair Display', Georgia, serif"
+          font-size="60" font-weight="700" font-style="italic" fill="#1f1d18">Just Jesus and a lot of coffee.</text>
+
+    <!-- Decorative rust rule -->
+    <line x1="350" y1="240" x2="1300" y2="240" stroke="#c8553d" stroke-width="2"/>
+
+    <!-- Body copy -->
+    <text x="100" y="319" font-family="'Lora', Georgia, serif"
+          font-size="38" fill="#6b6556" font-style="italic">We're a church for the rest of us.</text>
+    <text x="100" y="367" font-family="'Lora', Georgia, serif"
+          font-size="38" fill="#6b6556">Gamers, bikers, creatives, and musicians.</text>
+    <text x="100" y="415" font-family="'Lora', Georgia, serif"
+          font-size="38" fill="#6b6556">Anyone who's ever felt like they don't fit the mold.</text>
+    <text x="100" y="463" font-family="'Lora', Georgia, serif"
+          font-size="38" fill="#6b6556">Real faith. Real people. Real community.</text>
+
+    <!-- Community section -->
+    <g transform="translate(100, 560)">
+      <!-- Section label (editorial dept style) -->
+      <rect x="0" y="0" width="400" height="44" fill="#f8f1e3" stroke="#1f1d18" stroke-width="1.5"/>
+      <text x="16" y="30" font-family="'JetBrains Mono', monospace"
+            font-size="14" font-weight="700" fill="#1f1d18" letter-spacing="2px"><tspan fill="#c8553d">03</tspan>  FIND YOUR PEOPLE</text>
+    </g>
+
+    <text x="825" y="695" text-anchor="middle" font-family="'Playfair Display', Georgia, serif"
+          font-size="66" font-weight="800" fill="#1f1d18">Community That Fits You</text>
+
+    <!-- Groups grid (2 columns, editorial card style) -->
+    <g transform="translate(100, 756)">
+      <!-- Row 1 -->
+      <g>
+        <rect x="0" y="0" width="680" height="120" rx="0" fill="#f8f1e3" stroke="#1f1d18" stroke-width="1.5"/>
+        <text x="28" y="42" font-family="'JetBrains Mono', monospace" font-size="22" fill="#c8553d" font-weight="700" letter-spacing="1px">RESPAWN</text>
+        <text x="28" y="84" font-family="'Lora', Georgia, serif" font-size="30" fill="#1f1d18">Friday night gaming &amp; tabletop</text>
+      </g>
+      <g transform="translate(720, 0)">
+        <rect x="0" y="0" width="680" height="120" rx="0" fill="#f8f1e3" stroke="#1f1d18" stroke-width="1.5"/>
+        <text x="652" y="42" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="22" fill="#c8553d" font-weight="700" letter-spacing="1px">TERMINAL</text>
+        <text x="652" y="84" text-anchor="end" font-family="'Lora', Georgia, serif" font-size="30" fill="#1f1d18">Wednesday morning code &amp; coffee</text>
+      </g>
+
+      <!-- Row 2 -->
+      <g transform="translate(0, 140)">
+        <rect x="0" y="0" width="680" height="120" rx="0" fill="#f8f1e3" stroke="#1f1d18" stroke-width="1.5"/>
+        <text x="28" y="42" font-family="'JetBrains Mono', monospace" font-size="22" fill="#c8553d" font-weight="700" letter-spacing="1px">BASECAMP</text>
+        <text x="28" y="84" font-family="'Lora', Georgia, serif" font-size="30" fill="#1f1d18">Monthly outdoor adventures</text>
+      </g>
+      <g transform="translate(720, 140)">
+        <rect x="0" y="0" width="680" height="120" rx="0" fill="#f8f1e3" stroke="#1f1d18" stroke-width="1.5"/>
+        <text x="652" y="42" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="22" fill="#c8553d" font-weight="700" letter-spacing="1px">AMPLIFIED</text>
+        <text x="652" y="84" text-anchor="end" font-family="'Lora', Georgia, serif" font-size="30" fill="#1f1d18">Monthly open worship and creative night</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ===== CTA FOOTER ===== -->
+  <g transform="translate(0, 2060)">
+    <!-- Rust accent band -->
+    <rect x="-37.5" y="0" width="1725" height="80" fill="#c8553d"/>
+    <text x="825" y="52" text-anchor="middle"
+          font-family="'Playfair Display', Georgia, serif"
+          font-size="36" font-weight="700" font-style="italic" fill="#f4ede0">Questions? Text or call (423) 216-4433</text>
+  </g>
+
+  <!-- ===== BOTTOM BAR (dark editorial footer) ===== -->
+  <g transform="translate(0, 2330)">
+    <rect x="-37.5" width="1725" height="258" fill="#1f1d18"/>
+    <!-- Footer rule -->
+    <line x1="100" y1="20" x2="1550" y2="20" stroke="#3a362d" stroke-width="1.5"/>
+    <text x="825" y="125" text-anchor="middle"
+          font-family="'JetBrains Mono', monospace"
+          font-size="26" fill="#8e8775"
+          letter-spacing="1px">THE VINE CHURCH</text>
+    <text x="825" y="170" text-anchor="middle"
+          font-family="'Lora', Georgia, serif"
+          font-size="24" font-style="italic" fill="#b1aa97">Athens, TN  &#x2022;  hello@thevineathens.church  &#x2022;  thevineathens.church</text>
+  </g>
+
+  <!-- ===== CROP MARKS (trim corners) ===== -->
+  <g stroke="#000000" stroke-width="1" fill="none">
+    <path d="M-15,0 L0,0 L0,-15"/>
+    <path d="M1650,-15 L1650,0 L1665,0"/>
+    <path d="M-15,2550 L0,2550 L0,2565"/>
+    <path d="M1650,2565 L1650,2550 L1665,2550"/>
+  </g>
+</svg>

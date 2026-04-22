@@ -1,39 +1,83 @@
 /* ═══════════════════════════════════════════════════════════
-   THE VINE — Main JavaScript
+   THE VINE (vine3) - Main JavaScript
+
+   Editorial-magazine edition. Same behavior contract as the
+   prior versions - nav scroll handling, mobile hamburger,
+   scroll-reveal observer, contact form demo, console branding,
+   and Konami code easter egg - just retuned for the rust/ink/
+   newsprint palette.
    ═══════════════════════════════════════════════════════════ */
 
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  /* ── Navigation scroll effect ──────────────────────── */
-  const nav = document.getElementById('nav');
-  const navToggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
+  // Theme tokens used in inline style updates and console logs.
+  var THEME = {
+    rust:    '#c8553d',
+    rustHi:  '#a44427',
+    teal:    '#2a5f5b',
+    gold:    '#b88828',
+    ink:     '#1f1d18',
+    paper:   '#f4ede0',
+    muted:   '#6b6556'
+  };
 
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+  var nav = document.getElementById('nav');
+  var navToggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+  var contactForm = document.getElementById('contact-form');
+  var sections = document.querySelectorAll('section[id], header[id]');
+  var navAnchors = document.querySelectorAll('.nav-link');
+
+  /* ─── Mobile menu toggle ────────────────────────────── */
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var wasOpen = navLinks.classList.contains('open');
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(!wasOpen));
+    });
+
+    navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ─── Scroll handler: nav state + active section ──── */
+  window.addEventListener('scroll', function () {
+    var scrollY = window.scrollY;
+
+    if (nav) {
+      nav.classList.toggle('scrolled', scrollY > 30);
+    }
+
+    var adjustedScroll = scrollY + 160;
+    sections.forEach(function (section) {
+      var top = section.offsetTop;
+      var height = section.offsetHeight;
+      var id = section.getAttribute('id');
+
+      if (adjustedScroll >= top && adjustedScroll < top + height) {
+        navAnchors.forEach(function (anchor) {
+          anchor.classList.remove('active');
+          if (anchor.getAttribute('href') === '#' + id) {
+            anchor.classList.add('active');
+          }
+        });
+      }
+    });
   }, { passive: true });
 
-  /* ── Mobile menu toggle ────────────────────────────── */
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-
-  // Close mobile menu when a link is clicked
-  navLinks.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('active');
-      navLinks.classList.remove('open');
-    });
-  });
-
-  /* ── Scroll reveal (IntersectionObserver) ──────────── */
-  const revealElements = document.querySelectorAll('[data-reveal]');
+  /* ─── Scroll reveal via IntersectionObserver ────── */
+  var revealElements = document.querySelectorAll('[data-reveal]');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
           observer.unobserve(entry.target);
@@ -44,111 +88,120 @@
       rootMargin: '0px 0px -50px 0px'
     });
 
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach(function (el) { observer.observe(el); });
   } else {
-    // Fallback: just show everything
-    revealElements.forEach(el => el.classList.add('revealed'));
+    revealElements.forEach(function (el) { el.classList.add('revealed'); });
   }
 
-  /* ── Active nav link highlighting ──────────────────── */
-  const sections = document.querySelectorAll('section[id]');
-  const navAnchors = document.querySelectorAll('.nav-link');
+  /* ─── Contact form (demo only) ──────────────────── */
+  var formResetTimerId = null;
+  var noteResetTimerId = null;
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY + 100;
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
+      var formData = new FormData(contactForm);
+      var data = Object.fromEntries(formData.entries());
 
-      if (scrollY >= top && scrollY < top + height) {
-        navAnchors.forEach(a => {
-          a.classList.remove('active');
-          if (a.getAttribute('href') === '#' + id) {
-            a.classList.add('active');
-          }
-        });
-      }
+      var btn = contactForm.querySelector('button[type="submit"]');
+      var note = contactForm.querySelector('.form-note');
+      if (!btn || !note) return;
+
+      if (formResetTimerId) { clearTimeout(formResetTimerId); formResetTimerId = null; }
+      if (noteResetTimerId) { clearTimeout(noteResetTimerId); noteResetTimerId = null; }
+
+      var originalHTML = btn.innerHTML;
+
+      btn.innerHTML = '<span>Posted! \u2713</span>';
+      btn.style.background = THEME.teal;
+      btn.style.borderColor = THEME.teal;
+      btn.style.boxShadow = '4px 4px 0 ' + THEME.ink;
+      btn.disabled = true;
+
+      note.textContent = 'Letter received, ' + (data.name || 'friend') + '. We will be in touch soon.';
+      note.style.color = THEME.teal;
+
+      formResetTimerId = setTimeout(function () {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.boxShadow = '';
+        btn.disabled = false;
+        contactForm.reset();
+        formResetTimerId = null;
+
+        noteResetTimerId = setTimeout(function () {
+          note.textContent = 'We respect your privacy. No spam. No mailing list unless you ask.';
+          note.style.color = '';
+          noteResetTimerId = null;
+        }, 2000);
+      }, 4000);
+
+      // Demo log; wire to Netlify / Formspree / API in production.
+      console.log('%c\u2709 The Vine Gazette - New Letter', 'color: ' + THEME.rust + '; font-size: 14px; font-weight: bold; font-family: Georgia, serif;');
+      console.log('%cFrom: ' + (data.name || '(unsigned)'), 'color: ' + THEME.muted + ';');
+      console.log('%cReply to: ' + data.email, 'color: ' + THEME.muted + ';');
+      console.log('%cInterest: ' + (data.interest || 'Not specified'), 'color: ' + THEME.muted + ';');
+      console.log('%cMessage: ' + (data.message || 'No message'), 'color: ' + THEME.muted + ';');
     });
-  }, { passive: true });
+  }
 
-  /* ── Contact form handling ─────────────────────────── */
-  const contactForm = document.getElementById('contact-form');
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData.entries());
-
-    // For now, show a friendly confirmation
-    // In production, wire this up to a backend, Netlify Forms, Formspree, etc.
-    const btn = contactForm.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
-
-    btn.innerHTML = '<span>Sent! ✓</span>';
-    btn.style.background = '#3a8a3a';
-    btn.disabled = true;
-
-    // Show a thank you message
-    const note = contactForm.querySelector('.form-note');
-    note.textContent = 'Thanks, ' + (data.name || 'friend') + '! We\'ll be in touch soon.';
-    note.style.color = '#5cb85c';
-
-    // Reset after a few seconds
-    setTimeout(() => {
-      btn.innerHTML = originalHTML;
-      btn.style.background = '';
-      btn.disabled = false;
-      contactForm.reset();
-      setTimeout(() => {
-        note.textContent = 'We respect your privacy. No spam. No mailing list unless you ask.';
-        note.style.color = '';
-      }, 2000);
-    }, 4000);
-
-    // Log to console for demo purposes
-    console.log('%c🌿 The Vine — New Connection', 'color: #5cb85c; font-size: 14px; font-weight: bold;');
-    console.log('%cName: ' + data.name, 'color: #a0a0b0;');
-    console.log('%cEmail: ' + data.email, 'color: #a0a0b0;');
-    console.log('%cInterest: ' + (data.interest || 'Not specified'), 'color: #a0a0b0;');
-    console.log('%cMessage: ' + (data.message || 'No message'), 'color: #a0a0b0;');
-  });
-
-  /* ── Console Easter Egg ────────────────────────────── */
+  /* ─── Console branding ──────────────────────────── */
   console.log(
-    '%c🌿 The Vine',
-    'color: #5cb85c; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(92,184,92,0.3);'
+    '%cTHE VINE',
+    'color: ' + THEME.ink + '; background: ' + THEME.paper + '; font-size: 32px; font-weight: 900; font-style: italic; font-family: Georgia, serif; padding: 4px 12px; border-left: 4px solid ' + THEME.rust + ';'
   );
   console.log(
-    '%cWhere Misfits Find Family',
-    'color: #d4a843; font-size: 14px; font-style: italic;'
+    '%cIssue N\u00B0 01 \u2014 Athens, Tennessee \u2014 Est. 2025',
+    'color: ' + THEME.rustHi + '; font-size: 11px; font-family: ui-monospace, Menlo, monospace; letter-spacing: 2px;'
   );
   console.log(
-    '%c"I am the vine; you are the branches." — John 15:5',
-    'color: #a0a0b0; font-size: 11px;'
+    '%c"I am the vine; you are the branches." \u2014 John 15:5',
+    'color: ' + THEME.muted + '; font-size: 12px; font-family: Georgia, serif; font-style: italic;'
   );
   console.log(
-    '%cLooking at the source code? We like you already.\nConsider joining Terminal — our Code & Coffee group.\nhello@thevineathens.church',
-    'color: #666680; font-size: 11px;'
+    '%cReading the source? Lovely. Pull up a chair.\nConsider joining Terminal \u2014 our Code & Coffee group.\nhello@thevineathens.church',
+    'color: ' + THEME.ink + '; font-size: 11px;'
   );
 
-  /* ── Konami Code Easter Egg ────────────────────────── */
-  const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-  let konamiIndex = 0;
+  /* ─── Konami code easter egg ────────────────────
+     Up Up Down Down Left Right Left Right B A
+     Triggers a brief rust ink-flash + Respawn invitation. */
+  var konamiSequence = [
+    'ArrowUp', 'ArrowUp',
+    'ArrowDown', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight',
+    'ArrowLeft', 'ArrowRight',
+    'b', 'a'
+  ];
+  var konamiIndex = 0;
 
-  document.addEventListener('keydown', (e) => {
-    if (e.keyCode === konamiCode[konamiIndex]) {
+  document.addEventListener('keydown', function (e) {
+    var pressedKey = e.key;
+    var expectedKey = konamiSequence[konamiIndex];
+    var isMatch = pressedKey === expectedKey
+      || pressedKey.toLowerCase() === expectedKey.toLowerCase();
+
+    if (isMatch) {
       konamiIndex++;
-      if (konamiIndex === konamiCode.length) {
+
+      if (konamiIndex === konamiSequence.length) {
         konamiIndex = 0;
-        // Easter egg: flash the vine green
+
         document.body.style.transition = 'background 0.5s';
-        document.body.style.background = '#1a3a1a';
-        setTimeout(() => {
+        document.body.style.background = THEME.rust;
+
+        setTimeout(function () {
           document.body.style.background = '';
-          alert('🎮 Achievement Unlocked: KONAMI CONVERT\n\nYou found the secret code!\nYou\'re definitely one of us.\n\nSee you at Respawn (Friday nights).');
+          document.body.style.transition = '';
+
+          alert(
+            '\u2606 Achievement Unlocked: KONAMI CONVERT\n\n'
+            + 'You found the secret code!\n'
+            + 'You are definitely one of us.\n\n'
+            + 'See you at Respawn (Friday nights).'
+          );
         }, 500);
       }
     } else {
@@ -156,16 +209,4 @@
     }
   });
 
-  /* ── Smooth parallax for hero vines ────────────────── */
-  const heroVines = document.querySelector('.hero-vines');
-  if (heroVines) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY < window.innerHeight) {
-        heroVines.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
-        heroVines.style.opacity = Math.max(0.1, 0.5 - scrollY * 0.0005);
-      }
-    }, { passive: true });
-  }
-
-})();
+});
